@@ -1,12 +1,12 @@
 version: '3'
 
 tasks:
-  pip:install:
-    desc: "Install dependencies using pip"
+  uv:install:
+    desc: "Install dependencies"
     cmds:
-      - python -m venv .env
-      - .env/Scripts/activate
-      - pip install -U pip setuptools wheel
-      - pip install -U spacy pywin32 keyboard
-      - python -m spacy download en_core_web_sm
-      - python -m spacy download de_core_news_sm
+      - uv sync
+      - uv run -- spacy download de_dep_news_trf # german language model
+  uv:run:
+    desc: "Run the program"
+    cmds:
+      - uv run artikel_finder.py
